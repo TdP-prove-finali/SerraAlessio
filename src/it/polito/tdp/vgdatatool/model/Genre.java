@@ -5,7 +5,7 @@ public class Genre {
 	private String name;
 	private double price;
 	
-	//Costruttore
+	//Constructor
 	public Genre(String name, double price) {
 
 		this.name = name;
@@ -16,11 +16,9 @@ public class Genre {
 	public String getName() {
 		return name;
 	}
-
 	public double getPrice() {
 		return price;
-	}
-	
+	}	
 	public String toString() {
 		return name+", price/unit = "+price;
 	}

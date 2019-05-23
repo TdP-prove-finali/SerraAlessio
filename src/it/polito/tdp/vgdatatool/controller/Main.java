@@ -1,5 +1,6 @@
 package it.polito.tdp.vgdatatool.controller;
 	
+import it.polito.tdp.vgdatatool.model.Model;
 import javafx.application.Application;
 import javafx.stage.Stage;
 import javafx.scene.Scene;
@@ -11,7 +12,15 @@ public class Main extends Application {
 	@Override
 	public void start(Stage primaryStage) {
 		try {
-			BorderPane root = (BorderPane)FXMLLoader.load(getClass().getResource("VGDataTool.fxml"));
+			
+			FXMLLoader loader = new FXMLLoader(getClass().getResource("VGDataTool.fxml"));
+			BorderPane root = (BorderPane)loader.load();
+			VGDataToolController controller = loader.getController();
+			
+			//set the model
+			Model model = new Model();
+			controller.setModel(model);
+			
 			Scene scene = new Scene(root,400,400);
 			scene.getStylesheets().add(getClass().getResource("application.css").toExternalForm());
 			primaryStage.setScene(scene);
