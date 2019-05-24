@@ -19,14 +19,16 @@ public class Main extends Application {
 			
 			//Set the model
 			Model model = new Model();
-			controller.setModel(model);
+			controller.setModel(model,primaryStage);
 			
 			Scene scene = new Scene(root,330,177);
 			scene.getStylesheets().add(getClass().getResource("application.css").toExternalForm());
 			primaryStage.setScene(scene);
 			primaryStage.show();
+			
 			//Set title 
 			primaryStage.setTitle(" VGDataTool");
+			
 		} catch(Exception e) {
 			e.printStackTrace();
 		}
