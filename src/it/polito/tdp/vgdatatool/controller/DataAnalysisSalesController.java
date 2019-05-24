@@ -2,9 +2,13 @@ package it.polito.tdp.vgdatatool.controller;
 
 import java.io.IOException;
 import java.net.URL;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.ResourceBundle;
 
+import it.polito.tdp.vgdatatool.model.Genre;
 import it.polito.tdp.vgdatatool.model.Model;
+import it.polito.tdp.vgdatatool.model.Zone;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -25,6 +29,15 @@ public class DataAnalysisSalesController {
     public void setModel(Model model,Stage stage) {
 		this.model=model;
 		this.stage=stage;
+		boxGenre.getItems().addAll(model.getAllGenres());
+		
+		//Part of thw world in combobox
+		List<Zone> areas = new ArrayList<>();
+		areas.add( new Zone("Europe","EU_Sales") );
+		areas.add( new Zone("North America","NA_Sales") );
+		areas.add( new Zone("Japan","JP_Sales") );
+		areas.add( new Zone("Rest of the World","OTHER_Sales") );
+		boxAreas.getItems().addAll(areas);
 	}
 
     @FXML
@@ -34,7 +47,7 @@ public class DataAnalysisSalesController {
     private URL location;
 
     @FXML
-    private ComboBox<?> boxGenre;
+    private ComboBox<Genre> boxGenre;
 
     @FXML
     private TextField txtYear;
@@ -43,7 +56,7 @@ public class DataAnalysisSalesController {
     private Slider sliderValue;
 
     @FXML
-    private ComboBox<?> boxAreas;
+    private ComboBox<Zone> boxAreas;
 
     @FXML
     private TextArea txtResult;
