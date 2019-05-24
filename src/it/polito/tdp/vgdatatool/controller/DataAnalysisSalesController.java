@@ -2,13 +2,10 @@ package it.polito.tdp.vgdatatool.controller;
 
 import java.io.IOException;
 import java.net.URL;
-import java.util.ArrayList;
-import java.util.List;
 import java.util.ResourceBundle;
 
 import it.polito.tdp.vgdatatool.model.Genre;
 import it.polito.tdp.vgdatatool.model.Model;
-import it.polito.tdp.vgdatatool.model.Zone;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -30,14 +27,6 @@ public class DataAnalysisSalesController {
 		this.model=model;
 		this.stage=stage;
 		boxGenre.getItems().addAll(model.getAllGenres());
-		
-		//Part of thw world in combobox
-		List<Zone> areas = new ArrayList<>();
-		areas.add( new Zone("Europe","EU_Sales") );
-		areas.add( new Zone("North America","NA_Sales") );
-		areas.add( new Zone("Japan","JP_Sales") );
-		areas.add( new Zone("Rest of the World","OTHER_Sales") );
-		boxAreas.getItems().addAll(areas);
 	}
 
     @FXML
@@ -54,9 +43,6 @@ public class DataAnalysisSalesController {
 
     @FXML
     private Slider sliderValue;
-
-    @FXML
-    private ComboBox<Zone> boxAreas;
 
     @FXML
     private TextArea txtResult;
@@ -107,10 +93,8 @@ public class DataAnalysisSalesController {
         assert boxGenre != null : "fx:id=\"boxGenre\" was not injected: check your FXML file 'DataAnalysisSales.fxml'.";
         assert txtYear != null : "fx:id=\"txtYear\" was not injected: check your FXML file 'DataAnalysisSales.fxml'.";
         assert sliderValue != null : "fx:id=\"sliderValue\" was not injected: check your FXML file 'DataAnalysisSales.fxml'.";
-        assert boxAreas != null : "fx:id=\"boxAreas\" was not injected: check your FXML file 'DataAnalysisSales.fxml'.";
         assert txtResult != null : "fx:id=\"txtResult\" was not injected: check your FXML file 'DataAnalysisSales.fxml'.";
         assert handleBack != null : "fx:id=\"handleBack\" was not injected: check your FXML file 'DataAnalysisSales.fxml'.";
         assert handleAnalize != null : "fx:id=\"handleAnalize\" was not injected: check your FXML file 'DataAnalysisSales.fxml'.";
-
     }
 }

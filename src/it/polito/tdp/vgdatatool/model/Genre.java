@@ -20,7 +20,7 @@ public class Genre {
 		return price;
 	}	
 	public String toString() {
-		return name+", price/unit = "+price;
+		return name;
 	}
 
 	@Override
