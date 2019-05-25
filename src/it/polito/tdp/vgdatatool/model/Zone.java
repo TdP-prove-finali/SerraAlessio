@@ -1,21 +1,45 @@
 package it.polito.tdp.vgdatatool.model;
 
-public class Zone {
+public class Zone implements Comparable<Zone>{
 	
 	private String name;
-	private String code;
+	private double avgSales;
+	private double avgRatings;
+	private double index;
 	
-	public Zone(String name, String code) {
+	public Zone(String name, double avgSales, double avgRatings) {
 		this.name = name;
-		this.code = code;
+		this.avgSales = avgSales;
+		this.avgRatings = avgRatings;
 	}
 
+	//Getters and Setters
 	public String getName() {
 		return name;
 	}
+	
+	public void setAvgSales(double avgSales) {
+		this.avgSales =this.avgSales+avgSales;
+	}
 
-	public String getCode() {
-		return code;
+	public void setAvgRatings(double avgRatings) {
+		this.avgRatings =this.avgRatings+avgRatings;
+	}
+
+	public double getAvgSales() {
+		return avgSales;
+	}
+
+	public double getAvgRatings() {
+		return avgRatings;
+	}
+	
+	public double getIndex() {
+		return index;
+	}
+
+	public void setIndex(double index) {
+		this.index = index;
 	}
 
 	@Override
@@ -44,9 +68,11 @@ public class Zone {
 	}
 	
 	public String toString() {
-		return name;
+		return name + " - Avg Sales: "+(float)avgSales+" Avg Ratings: "+(float)avgRatings+" INDEX: "+(float)index;
 	}
-	
-	
 
+	@Override
+	public int compareTo(Zone o) {
+		return (int) (this.index-o.getIndex());
+	}
 }

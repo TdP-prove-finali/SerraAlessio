@@ -2,10 +2,12 @@ package it.polito.tdp.vgdatatool.controller;
 
 import java.io.IOException;
 import java.net.URL;
+import java.util.List;
 import java.util.ResourceBundle;
 
 import it.polito.tdp.vgdatatool.model.Genre;
 import it.polito.tdp.vgdatatool.model.Model;
+import it.polito.tdp.vgdatatool.model.Zone;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -56,6 +58,16 @@ public class DataAnalysisSalesController {
     @FXML
     void doAnalize(ActionEvent event) {
 
+    	txtResult.clear();
+    	
+    	Genre g = boxGenre.getValue();
+    	int year = Integer.parseInt(txtYear.getText());
+    	double preferences = sliderValue.getValue();
+    	
+    	List<Zone> result = model.getBestZone(g, year, preferences);
+    	
+    	for (Zone z : result) txtResult.appendText(z.toString()+"\n");
+    	
     }
 
     @FXML

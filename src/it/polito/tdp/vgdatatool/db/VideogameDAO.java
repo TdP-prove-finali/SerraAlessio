@@ -34,4 +34,47 @@ public class VideogameDAO {
 		}
 	}
 	
+	public List<Videogame> getVideogames(Genre genre,int year){
+		
+		final String sql = "SELECT * FROM DATA WHERE Genre=? AND Year_Release>?";
+        List<Videogame> result = new ArrayList<>();
+		
+		try {
+			Connection conn = DBConnect.getConnection();
+			PreparedStatement st = conn.prepareStatement(sql);
+			
+			//Set data
+			st.setString(1,genre.getName());
+			st.setObject(2, year);
+			
+			ResultSet rs = st.executeQuery();
+
+			while (rs.next()) {
+				
+				String name = rs.getString("Name");
+				String platform = rs.getString("Platform");
+			    int yearRelease = rs.getInt("Year_Release");
+			    String genres = rs.getString("Genre");
+			    String publisher= rs.getString("Publisher");
+			    double nA_sales = rs.getDouble("NA_Sales");
+			    double eU_sales = rs.getDouble("EU_Sales");
+			    double jP_sales = rs.getDouble("JP_Sales");
+			    double oTHER_sales = rs.getDouble("OTHER_Sales");
+			    double gLOBAL_sales = rs.getDouble("GLOBAL_Sales");
+			    int criticR = rs.getInt("CRITIC_Ratings");
+			    double userR = rs.getDouble("USER_Ratings");
+				
+				Videogame v = new Videogame(name, platform, yearRelease, genres, publisher, nA_sales, eU_sales, jP_sales, 
+						                     oTHER_sales, gLOBAL_sales, criticR, userR);
+				result.add(v);
+			}
+
+			conn.close();
+			return result;
+
+		} catch (SQLException e) {
+			throw new RuntimeException("Errore Db",e);
+		}
+	}
+	
 }
