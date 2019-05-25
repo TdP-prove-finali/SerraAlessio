@@ -28,14 +28,14 @@ CREATE TABLE IF NOT EXISTS `data` (
   `JP_Sales` double DEFAULT NULL,
   `OTHER_Sales` double DEFAULT NULL,
   `GLOBAL_Sales` double DEFAULT NULL,
-  `CRTITIC_Ratings` int(11) DEFAULT NULL,
+  `CRITIC_Ratings` int(11) DEFAULT NULL,
   `USER_Ratings` double DEFAULT NULL,
   KEY `Name` (`Name`,`Platform`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
--- Dump dei dati della tabella datavg.data: ~7.935 rows (circa)
+-- Dump dei dati della tabella datavg.data: ~7.948 rows (circa)
 /*!40000 ALTER TABLE `data` DISABLE KEYS */;
-INSERT INTO `data` (`Name`, `Platform`, `Year_Release`, `Genre`, `Publisher`, `NA_Sales`, `EU_Sales`, `JP_Sales`, `OTHER_Sales`, `GLOBAL_Sales`, `CRTITIC_Ratings`, `USER_Ratings`) VALUES
+INSERT INTO `data` (`Name`, `Platform`, `Year_Release`, `Genre`, `Publisher`, `NA_Sales`, `EU_Sales`, `JP_Sales`, `OTHER_Sales`, `GLOBAL_Sales`, `CRITIC_Ratings`, `USER_Ratings`) VALUES
 	('Wii Sports', 'Wii', 2006, 'Sports', 'Nintendo', 41.36, 28.96, 3.77, 8.45, 82.53, 76, 8),
 	('Super Mario Bros.', 'NES', 1985, 'Platform', 'Nintendo', 29.08, 3.58, 6.81, 0.77, 40.24, 90, 8.9),
 	('Mario Kart Wii', 'Wii', 2008, 'Racing', 'Nintendo', 15.68, 12.76, 3.79, 3.29, 35.52, 82, 8.3),
@@ -48,7 +48,7 @@ INSERT INTO `data` (`Name`, `Platform`, `Year_Release`, `Genre`, `Publisher`, `N
 	('Duck Hunt', 'NES', 1984, 'Shooter', 'Nintendo', 26.93, 0.63, 0.28, 0.47, 28.31, 77, 8),
 	('Nintendogs', 'DS', 2005, 'Simulation', 'Nintendo', 9.05, 10.95, 1.93, 2.74, 24.67, 70, 7.2),
 	('Mario Kart DS', 'DS', 2005, 'Racing', 'Nintendo', 9.71, 7.47, 4.13, 1.9, 23.21, 91, 8.6),
-	('Pokemon Gold/Pokemon Silver', 'GB', 1999, 'Role-Playing', 'Nintendo', 9, 6.18, 7.2, 0.71, 23.1, 90, 9),
+	('Pokemon Gold/Pokemon Silver', 'GB', 1999, 'Role-Playing', 'Nintendo', 8, 6.18, 7.2, 0.71, 23.1, 90, 9),
 	('Wii Fit', 'Wii', 2007, 'Sports', 'Nintendo', 8.92, 8.03, 3.6, 2.15, 22.7, 80, 7.7),
 	('Kinect Adventures!', 'X360', 2010, 'Misc', 'Microsoft Game Studios', 15, 4.89, 0.24, 1.69, 21.81, 61, 6.3),
 	('Wii Fit Plus', 'Wii', 2009, 'Sports', 'Nintendo', 9.01, 8.49, 2.53, 1.77, 21.79, 80, 7.4),
@@ -7696,7 +7696,7 @@ INSERT INTO `data` (`Name`, `Platform`, `Year_Release`, `Genre`, `Publisher`, `N
 	('NBA 2K15', 'PS4', 2014, 'Sports', '2K Sports', 1.49, 0.55, 0.01, 0.44, 2.49, 79, 7.9),
 	('Dying Light', 'PS4', 2015, 'Action', 'Warner Bros. Interactive', 1.18, 0.74, 0.13, 0.4, 2.45, 77, 7.7),
 	('Dark Souls III', 'PS4', 2016, 'Role-Playing', 'Namco Bandai Games', 1, 0.63, 0.44, 0.34, 2.42, 64, 6.4),
-	('Ratchet & Clank (2016)', 'PS4', 2016, 'Platform', 'Sony Interactive Entertainment', 0.97, 0.97, 0.06, 0.39, 2.38, 7.8, 8),
+	('Ratchet & Clank (2016)', 'PS4', 2016, 'Platform', 'Sony Interactive Entertainment', 0.97, 0.97, 0.06, 0.39, 2.38, 8, 8),
 	('DriveClub', 'PS4', 2014, 'Racing', 'Sony Computer Entertainment', 0.37, 1.63, 0.02, 0.36, 2.37, 65, 5.7),
 	('Uncharted: The Lost Legacy', 'PS4', 2017, 'Action', 'Sony Interactive Entertainment', 0.58, 1.38, 0.04, 0.36, 2.37, 58, 5.8),
 	('Dragon Age III: Inquisition', 'PS4', 2014, 'Role-Playing', 'Electronic Arts', 1.07, 0.8, 0.08, 0.38, 2.34, 67, 6.7),
