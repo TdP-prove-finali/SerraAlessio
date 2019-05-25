@@ -35,27 +35,38 @@ public class Model {
 		//Get datas for index
 		for ( Videogame v : videogames) {
 			//NA
-			na.setAvgSales(v.getNA_sales());
-			na.setAvgRatings(v.getCriticR()/10 + v.getUserR());
+			na.sumSales(v.getNA_sales());
+			na.sumRatings(v.getCriticR()/10 + v.getUserR());
 			//EU
-			eu.setAvgSales(v.getEU_sales());
-			eu.setAvgRatings(v.getCriticR()/10 + v.getUserR());
+			eu.sumSales(v.getEU_sales());
+			eu.sumRatings(v.getCriticR()/10 + v.getUserR());
 			//JP
-			jp.setAvgSales(v.getJP_sales());
-			jp.setAvgRatings(v.getCriticR()/10 + v.getUserR());
+			jp.sumSales(v.getJP_sales());
+			jp.sumRatings(v.getCriticR()/10 + v.getUserR());
 			//ROW
-			row.setAvgSales(v.getOTHER_sales());
-			row.setAvgRatings(v.getCriticR()/10 + v.getUserR());	
+			row.sumSales(v.getOTHER_sales());
+			row.sumRatings(v.getCriticR()/10 + v.getUserR());	
 		}
 		
 		//Calculating index
-		double NAindex = ((na.getAvgSales()/videogames.size())*weightS) + ((na.getAvgRatings()/(videogames.size()*2))*weightR);
+		na.setAvgSales(na.getAvgSales()/videogames.size());
+		na.setAvgRatings(na.getAvgRatings()/(videogames.size()*2));
+		double NAindex = na.getAvgSales()*weightS + na.getAvgRatings()*weightR;
 		na.setIndex(NAindex);
-		double EUindex = ((eu.getAvgSales()/videogames.size())*weightS) + ((eu.getAvgRatings()/(videogames.size()*2))*weightR);
+		
+		eu.setAvgSales(eu.getAvgSales()/videogames.size());
+		eu.setAvgRatings(eu.getAvgRatings()/(videogames.size()*2));
+		double EUindex = eu.getAvgSales()*weightS + eu.getAvgRatings()*weightR;
 		eu.setIndex(EUindex);
-		double JPindex = ((jp.getAvgSales()/videogames.size())*weightS) + ((jp.getAvgRatings()/(videogames.size()*2))*weightR);
+		
+		jp.setAvgSales(jp.getAvgSales()/videogames.size());
+		jp.setAvgRatings(jp.getAvgRatings()/(videogames.size()*2));
+		double JPindex = jp.getAvgSales()*weightS + jp.getAvgRatings()*weightR;
 		jp.setIndex(JPindex);
-		double ROWindex = ((row.getAvgSales()/videogames.size())*weightS) + ((row.getAvgRatings()/(videogames.size()*2))*weightR);
+		
+		row.setAvgSales(row.getAvgSales()/videogames.size());
+		row.setAvgRatings(row.getAvgRatings()/(videogames.size()*2));
+		double ROWindex = row.getAvgSales()*weightS + row.getAvgRatings()*weightR;
 		row.setIndex(ROWindex);
 		
 		result.add(na);

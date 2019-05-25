@@ -1,6 +1,6 @@
 package it.polito.tdp.vgdatatool.model;
 
-public class Zone implements Comparable<Zone>{
+public class Zone {
 	
 	private String name;
 	private double avgSales;
@@ -17,13 +17,13 @@ public class Zone implements Comparable<Zone>{
 	public String getName() {
 		return name;
 	}
-	
+
 	public void setAvgSales(double avgSales) {
-		this.avgSales =this.avgSales+avgSales;
+		this.avgSales = avgSales;
 	}
 
 	public void setAvgRatings(double avgRatings) {
-		this.avgRatings =this.avgRatings+avgRatings;
+		this.avgRatings = avgRatings;
 	}
 
 	public double getAvgSales() {
@@ -70,9 +70,12 @@ public class Zone implements Comparable<Zone>{
 	public String toString() {
 		return name + " - Avg Sales: "+avgSales+" Avg Ratings: "+avgRatings+" INDEX: "+index;
 	}
+	
+	public void sumSales(double avgSales) {
+		this.avgSales =this.avgSales+avgSales;
+	}
 
-	@Override
-	public int compareTo(Zone o) {
-		return (int) (this.index-o.getIndex());
+	public void sumRatings(double avgRatings) {
+		this.avgRatings =this.avgRatings+avgRatings;
 	}
 }
