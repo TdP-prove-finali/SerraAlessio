@@ -68,7 +68,7 @@ public class Zone implements Comparable<Zone>{
 	}
 	
 	public String toString() {
-		return name + " - Avg Sales: "+(float)avgSales+" Avg Ratings: "+(float)avgRatings+" INDEX: "+(float)index;
+		return name + " - Avg Sales: "+avgSales+" Avg Ratings: "+avgRatings+" INDEX: "+index;
 	}
 
 	@Override

@@ -5,7 +5,8 @@
 <?import javafx.scene.control.ComboBox?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.Slider?>
-<?import javafx.scene.control.TextArea?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.layout.HBox?>
@@ -83,11 +84,17 @@
                   </Label>
                </children>
             </HBox>
-            <TextArea fx:id="txtResult" prefHeight="222.0" prefWidth="512.0">
+            <TableView fx:id="txtResult" prefHeight="200.0" prefWidth="200.0">
+              <columns>
+                <TableColumn fx:id="txtZone" prefWidth="115.0" text="Zone" />
+                  <TableColumn fx:id="txtAvgSales" prefWidth="110.0" text="Avg Sales" />
+                  <TableColumn fx:id="txtAvgRatings" prefWidth="110.0" text="Avg Ratings" />
+                  <TableColumn fx:id="txtIndex" prefWidth="176.0" text="Index" />
+              </columns>
                <VBox.margin>
-                  <Insets bottom="10.0" left="10.0" right="10.0" top="15.0" />
+                  <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
                </VBox.margin>
-            </TextArea>
+            </TableView>
          </children>
       </VBox>
    </center>

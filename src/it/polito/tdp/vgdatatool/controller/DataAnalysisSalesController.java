@@ -8,6 +8,8 @@ import java.util.ResourceBundle;
 import it.polito.tdp.vgdatatool.model.Genre;
 import it.polito.tdp.vgdatatool.model.Model;
 import it.polito.tdp.vgdatatool.model.Zone;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -15,8 +17,11 @@ import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.Slider;
+import javafx.scene.control.TableColumn;
+import javafx.scene.control.TableView;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
+import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.BorderPane;
 import javafx.stage.Stage;
 
@@ -47,7 +52,19 @@ public class DataAnalysisSalesController {
     private Slider sliderValue;
 
     @FXML
-    private TextArea txtResult;
+    private TableView<Zone> txtResult;
+
+    @FXML
+    private TableColumn<Zone, String> txtZone;
+
+    @FXML
+    private TableColumn<Zone, Double> txtAvgSales;
+
+    @FXML
+    private TableColumn<Zone, Double> txtAvgRatings;
+
+    @FXML
+    private TableColumn<Zone, Double> txtIndex;
 
     @FXML
     private Button handleBack;
@@ -58,7 +75,7 @@ public class DataAnalysisSalesController {
     @FXML
     void doAnalize(ActionEvent event) {
 
-    	txtResult.clear();
+    	//Clean the result...
     	
     	Genre g = boxGenre.getValue();
     	int year = Integer.parseInt(txtYear.getText());
@@ -66,7 +83,11 @@ public class DataAnalysisSalesController {
     	
     	List<Zone> result = model.getBestZone(g, year, preferences);
     	
-    	for (Zone z : result) txtResult.appendText(z.toString()+"\n");
+    	ObservableList<Zone> values = FXCollections.observableArrayList();
+    	
+    	for (Zone z : result) values.add(z);
+    	
+    	txtResult.setItems(values);
     	
     }
 
@@ -106,7 +127,18 @@ public class DataAnalysisSalesController {
         assert txtYear != null : "fx:id=\"txtYear\" was not injected: check your FXML file 'DataAnalysisSales.fxml'.";
         assert sliderValue != null : "fx:id=\"sliderValue\" was not injected: check your FXML file 'DataAnalysisSales.fxml'.";
         assert txtResult != null : "fx:id=\"txtResult\" was not injected: check your FXML file 'DataAnalysisSales.fxml'.";
+        assert txtZone != null : "fx:id=\"txtZone\" was not injected: check your FXML file 'DataAnalysisSales.fxml'.";
+        assert txtAvgSales != null : "fx:id=\"txtAvgSales\" was not injected: check your FXML file 'DataAnalysisSales.fxml'.";
+        assert txtAvgRatings != null : "fx:id=\"txtAvgRatings\" was not injected: check your FXML file 'DataAnalysisSales.fxml'.";
+        assert txtIndex != null : "fx:id=\"txtIndex\" was not injected: check your FXML file 'DataAnalysisSales.fxml'.";
         assert handleBack != null : "fx:id=\"handleBack\" was not injected: check your FXML file 'DataAnalysisSales.fxml'.";
         assert handleAnalize != null : "fx:id=\"handleAnalize\" was not injected: check your FXML file 'DataAnalysisSales.fxml'.";
+        
+        //Set value in the tableView
+        txtZone.setCellValueFactory(new PropertyValueFactory<>("name"));
+        txtAvgSales.setCellValueFactory(new PropertyValueFactory<>("avgSales"));
+        txtAvgRatings.setCellValueFactory(new PropertyValueFactory<>("avgRatings"));
+        txtIndex.setCellValueFactory(new PropertyValueFactory<>("index"));
+        
     }
 }
