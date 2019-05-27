@@ -74,8 +74,6 @@ public class DataAnalysisSalesController {
 
     @FXML
     void doAnalize(ActionEvent event) {
-
-    	//Clean the result...
     	
     	Genre g = boxGenre.getValue();
     	int year = Integer.parseInt(txtYear.getText());
@@ -88,6 +86,9 @@ public class DataAnalysisSalesController {
     	for (Zone z : result) values.add(z);
     	
     	txtResult.setItems(values);
+    	
+    	//Clean for the new results
+    	txtResult.refresh();
     	
     }
 
