@@ -69,6 +69,30 @@ public class VGDataToolController {
     @FXML
     void doMixSales(ActionEvent event) {
     	
+       	//Go to BestMixController
+    	try {
+    		
+    	FXMLLoader loader = new FXMLLoader(getClass().getResource("BestMix.fxml"));
+		BorderPane root = (BorderPane)loader.load();
+		
+		BestMixController controller = loader.getController();
+		
+		//Set the model
+		Model model = new Model();
+		controller.setModel(model,this.stage);
+		
+		Scene scene = new Scene(root,562,347);
+		
+		scene.getStylesheets().add(getClass().getResource("application.css").toExternalForm());
+		stage.setScene(scene);
+		stage.show();
+		
+		//Set title 
+		stage.setTitle(" Best Mix Tool");
+		
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
 
     }
 

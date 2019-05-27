@@ -4,10 +4,12 @@ import java.security.cert.CollectionCertStoreParameters;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
-
 import it.polito.tdp.vgdatatool.db.VideogameDAO;
 
 public class Model {
+	
+	List<Genre> best = new ArrayList<>();
+	List<Genre> allGenres = new ArrayList<>();
 	
 	public List<Genre> getAllGenres(){
 		VideogameDAO dao = new VideogameDAO();
@@ -84,6 +86,60 @@ public class Model {
 		}
 		
 		return result;
+	}
+	
+	//Start recursion
+	public List<Genre> recursion(int lenght,int budget){
+		
+		//Collego Model e Dao
+		VideogameDAO dao = new VideogameDAO();
+		//Clear by old recursion
+		if (!allGenres.isEmpty()) allGenres.clear();
+		
+		//Add all genres need for combination
+		for (int i=0 ; i<lenght;i++)
+		allGenres.addAll(dao.getAllGenres());
+		
+		//Creo soluzione parziale vuota
+		List<Genre> partial = new ArrayList<Genre>();
+		
+		//Azzero best
+		this.best=null;
+		
+		//Start recursion (level 0)
+		sub_recursion(partial, 0, lenght, budget);
+		
+		//ritorno la miglior sequenza trovata 
+		return this.best;
+	}
+	
+	public void sub_recursion(List<Genre> partial,int level,int lenght,int budget){
+		
+		//FINAL CASE
+		if (partial.size() == lenght) {	
+		//IF per verificare che il budget dei generi si avvicini il più possibile al Budget limite
+			
+		this.best=partial;
+
+	    }
+				
+		//INTERMEDIATE CASE
+		for (Genre gen : allGenres ) {
+					
+			if ( tryBudget(partial, budget, gen)) {	
+				partial.add(gen);				
+				sub_recursion(partial, level+1, lenght, budget);
+				//backtracking		
+				partial.remove(partial.size()-1);
+			}
+				
+		}
+	}
+	
+	public boolean tryBudget(List<Genre> genres,int budget,Genre test) {
+	
+		
+		return false;
 	}
 
 }
