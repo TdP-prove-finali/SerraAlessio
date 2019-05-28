@@ -15,6 +15,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.scene.chart.PieChart;
 import javafx.scene.control.Button;
+import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
@@ -29,6 +30,9 @@ public class BestMixController{
     public void setModel(Model model,Stage stage) {
 		this.model=model;
 		this.stage=stage;
+		
+		//Set combo box
+		comboBox.getItems().addAll("North America","Europe","Japan","Rest of World","All");
 
 		//Set process time invisible before the start of the algorithm
 		processTime.setOpacity(0.0);
@@ -47,6 +51,9 @@ public class BestMixController{
 
     @FXML
     private TextField txtLenght;
+    
+    @FXML
+    private ComboBox<String> comboBox;
 
     @FXML
     private TextField txtYear;
@@ -78,17 +85,20 @@ public class BestMixController{
     	
     	int lenght = Integer.parseInt(txtLenght.getText());
     	int budget = Integer.parseInt(txtBudget.getText());
+    	int year = Integer.parseInt(txtYear.getText());
+    	String zone = comboBox.getValue();
     	
-    	List<Genre> result = model.recursion(lenght, budget);
+    	if (comboBox.getValue()!=null) {
+    	List<Genre> result = model.recursion(lenght, budget, year, zone);
     	
     	if (result != null) {
     		txtResult.appendText("The best combination for "+budget+"$ is:\n");
     		
     		//Print result
-    		for (int i=0 ; i<result.size()-1;i++) {
+    		for (int i=0 ; i<result.size();i++) {
     			txtResult.appendText((i+1)+") "+result.get(i).toString()+"\n");
     		}
-    	}
+    	}}
     	else txtResult.appendText("NO combination for this lenght and \nthis budget found!");
     	
     	}catch (NumberFormatException nbe) {
@@ -133,6 +143,7 @@ public class BestMixController{
         assert txtBudget != null : "fx:id=\"txtBudget\" was not injected: check your FXML file 'BestMix.fxml'.";
         assert txtResult != null : "fx:id=\"txtResult\" was not injected: check your FXML file 'BestMix.fxml'.";
         assert pieChart != null : "fx:id=\"pieChart\" was not injected: check your FXML file 'BestMix.fxml'.";
+        assert comboBox != null : "fx:id=\"comboBox\" was not injected: check your FXML file 'BestMix.fxml'.";
         assert handleBack != null : "fx:id=\"handleBack\" was not injected: check your FXML file 'BestMix.fxml'.";
         assert handleAnalize != null : "fx:id=\"handleAnalize\" was not injected: check your FXML file 'BestMix.fxml'.";
         assert processTime != null : "fx:id=\"processTime\" was not injected: check your FXML file 'BestMix.fxml'.";

@@ -89,7 +89,7 @@ public class Model {
 	}
 	
 	//Start recursion
-	public List<Genre> recursion(int lenght,int budget){
+	public List<Genre> recursion(int lenght,int budget, int year, String zone){
 		
 		//Collego Model e Dao
 		VideogameDAO dao = new VideogameDAO();
@@ -97,8 +97,7 @@ public class Model {
 		if (!allGenres.isEmpty()) allGenres.clear();
 		
 		//Add all genres need for combination
-		for (int i=0 ; i<lenght;i++)
-		allGenres.addAll(dao.getAllGenres());
+		allGenres= dao.getGenresRecursion(year, zone);;
 		
 		//Creo soluzione parziale vuota
 		List<Genre> partial = new ArrayList<Genre>();
@@ -110,25 +109,26 @@ public class Model {
 		sub_recursion(partial, 0, lenght, budget);
 		
 		//ritorno la miglior sequenza trovata 
-		return this.best;
+		return best;
 	}
 	
 	public void sub_recursion(List<Genre> partial,int level,int lenght,int budget){
 		
 		//FINAL CASE
 		if (partial.size() == lenght) {	
-		//IF per verificare che il budget dei generi si avvicini il più possibile al Budget limite
-			
-		this.best=partial;
-
-	    }
+		//IF per verificare che il budget dei generi si avvicini il più possibile al Budget limite	
+		this.best = new ArrayList<>(partial);
+		return;
+		}
 				
 		//INTERMEDIATE CASE
 		for (Genre gen : allGenres ) {
 					
 			if ( tryBudget(partial, budget, gen)) {	
-				partial.add(gen);				
+				partial.add(gen);		
+				
 				sub_recursion(partial, level+1, lenght, budget);
+				
 				//backtracking		
 				partial.remove(partial.size()-1);
 			}
@@ -139,7 +139,7 @@ public class Model {
 	public boolean tryBudget(List<Genre> genres,int budget,Genre test) {
 	
 		
-		return false;
+		return true;
 	}
 
 }

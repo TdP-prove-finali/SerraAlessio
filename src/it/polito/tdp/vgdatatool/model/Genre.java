@@ -4,12 +4,14 @@ public class Genre {
 	
 	private String name;
 	private double price;
+	private double avgSales;
 	
 	//Constructor
-	public Genre(String name, double price) {
+	public Genre(String name, double price,double avgSales) {
 
 		this.name = name;
 		this.price = price;
+		this.avgSales = avgSales;
 	}
 
 	//Getters
@@ -19,6 +21,9 @@ public class Genre {
 	public double getPrice() {
 		return price;
 	}	
+	public double getAvgSales() {
+		return avgSales;
+	}
 	public String toString() {
 		return name;
 	}

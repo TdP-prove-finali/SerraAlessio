@@ -22,7 +22,7 @@ public class VideogameDAO {
 			ResultSet rs = st.executeQuery();
 
 			while (rs.next()) {
-				Genre g = new Genre(rs.getString("gen"), rs.getDouble("price"));
+				Genre g = new Genre(rs.getString("gen"), rs.getDouble("price"),0.0);
 				result.add(g);
 			}
 
@@ -67,6 +67,39 @@ public class VideogameDAO {
 				Videogame v = new Videogame(name, platform, yearRelease, genres, publisher, nA_sales, eU_sales, jP_sales, 
 						                     oTHER_sales, gLOBAL_sales, criticR, userR);
 				result.add(v);
+			}
+
+			conn.close();
+			return result;
+
+		} catch (SQLException e) {
+			throw new RuntimeException("Errore Db",e);
+		}
+	}
+	
+	public List<Genre> getGenresRecursion(int year, String zone){
+		
+		final String sql = "SELECT DISTINCT d.Genre AS genere, AVG(?) AS sales, g.PriceForUnit AS price FROM DATA d, genreprice g WHERE Year_Release>=? AND d.Genre=g.Genre GROUP BY d.Genre";
+        List<Genre> result = new ArrayList<>();
+		
+		try {
+			Connection conn = DBConnect.getConnection();
+			PreparedStatement st = conn.prepareStatement(sql);
+			
+			//Set parameter
+			if (zone.compareTo("North America")==0) st.setString(1, "NA_Sales");
+			if (zone.compareTo("Europe")==0) st.setString(1, "EU_Sales");
+			if (zone.compareTo("Japan")==0) st.setString(1, "JP_Sales");
+			if (zone.compareTo("Rest of World")==0) st.setString(1, "OTHER_Sales");
+			if (zone.compareTo("All")==0) st.setString(1, "GLOBAL_Sales");
+			st.setInt(2, year);
+			
+			
+			ResultSet rs = st.executeQuery();
+
+			while (rs.next()) {
+				Genre g = new Genre(rs.getString("genere"), rs.getDouble("price"),rs.getDouble("sales"));
+				result.add(g);
 			}
 
 			conn.close();
