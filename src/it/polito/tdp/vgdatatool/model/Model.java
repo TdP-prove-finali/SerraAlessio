@@ -116,15 +116,20 @@ public class Model {
 		
 		//FINAL CASE
 		if (partial.size() == lenght) {	
-		//IF per verificare che il budget dei generi si avvicini il più possibile al Budget limite	
-		this.best = new ArrayList<>(partial);
-		return;
+			 //Choose the best that maximize the budget
+	         if ( getListPrice(partial)<=budget && ( budget-getListPrice(partial) < budget-getListPrice(best))) {		
+	        	 
+	         this.best = new ArrayList<>(partial);
+		     
+		     return;
+	         }
 		}
 				
 		//INTERMEDIATE CASE
 		for (Genre gen : allGenres ) {
-					
+					                              
 			if ( tryBudget(partial, budget, gen)) {	
+				
 				partial.add(gen);		
 				
 				sub_recursion(partial, level+1, lenght, budget);
@@ -136,10 +141,32 @@ public class Model {
 		}
 	}
 	
-	public boolean tryBudget(List<Genre> genres,int budget,Genre test) {
-	
+	public boolean tryBudget(List<Genre> partial,int budget,Genre test) {
+	    
+		//First step of recursion
+		if (partial.size()==0) return true;
+
+		//Get price of the test
+		double priceTest = test.getAvgSales()*1000*test.getPrice();
 		
-		return true;
+		//Get price of the partial
+		double pricePartial = getListPrice(partial);
+		
+		if (pricePartial+priceTest<=budget) return true;
+		else return true;
+		
+	}
+	
+	public double getListPrice(List<Genre> list) {
+		
+		double priceList = 0.0;	
+		
+		for (Genre gen : list) {
+			priceList = priceList + gen.getAvgSales()*1000*gen.getPrice();
+		}
+		
+		return priceList;
+
 	}
 
 }
