@@ -134,6 +134,7 @@ public class Model {
 				
 				sub_recursion(partial, level+1, lenght, budget);
 				
+				
 				//backtracking		
 				partial.remove(partial.size()-1);
 			}
