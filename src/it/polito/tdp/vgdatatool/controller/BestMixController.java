@@ -2,6 +2,7 @@ package it.polito.tdp.vgdatatool.controller;
 
 import java.io.IOException;
 import java.net.URL;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.ResourceBundle;
 
@@ -86,23 +87,40 @@ public class BestMixController{
     	int lenght = Integer.parseInt(txtLenght.getText());
     	int budget = Integer.parseInt(txtBudget.getText());
     	int year = Integer.parseInt(txtYear.getText());
+    	
     	String zone = comboBox.getValue();
     	
-    	if (comboBox.getValue()!=null) {
+    	if (zone!=null) {
     	List<Genre> result = model.recursion(lenght, budget, year, zone);
     	
-    	if (result != null) {
+    	System.out.println(result);
+    	
+    	if (result.size()==lenght) {
     		txtResult.appendText("The best combination for "+budget+"$ is:\n");
     		
-    		//Print result
+    		//List for piechart data
+    		List<PieChart.Data> dataPieChart = new ArrayList<>();
+  
+    		//Print result and get piechart data
     		for (int i=0 ; i<result.size();i++) {
     			txtResult.appendText((i+1)+") "+result.get(i).toString()+"\n");
+    			dataPieChart.add(new PieChart.Data(result.get(i).getName(), result.get(i).getAvgSales()*1000*result.get(i).getPrice()));
     		}
-    	}}
+    		
+    		//Piechart
+    	    int budgetLeft = (int)(budget -model.getListPrice(result));
+    	    
+    	    dataPieChart.add(new PieChart.Data("Budget left",budgetLeft));
+    		ObservableList<PieChart.Data> pieChartData = FXCollections.observableArrayList(dataPieChart);
+    		pieChart.setData(pieChartData);
+    	}
     	else txtResult.appendText("NO combination for this lenght and \nthis budget found!");
+
+    	}
+    	else txtResult.appendText("Values missing!");
     	
-    	}catch (NumberFormatException nbe) {
-    		txtResult.appendText("Insert correct values!\n");
+    	}catch (NumberFormatException e) {
+    		txtResult.appendText("Insert correct values!");
     	}
     }
 

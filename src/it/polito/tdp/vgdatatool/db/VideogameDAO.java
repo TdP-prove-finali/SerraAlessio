@@ -79,7 +79,18 @@ public class VideogameDAO {
 	
 	public List<Genre> getGenresRecursion(int year, String zone){
 		
-		final String sql = "SELECT DISTINCT d.Genre AS genere, AVG(?) AS sales, g.PriceForUnit AS price FROM DATA d, genreprice g WHERE Year_Release>=? AND d.Genre=g.Genre GROUP BY d.Genre";
+		 String string = "";
+		
+		//Choice of comboBox
+		if (zone.compareTo( "North America" )==0) string= "SELECT DISTINCT d.Genre AS genere, AVG(NA_Sales) AS sales, g.PriceForUnit AS price FROM DATA d, genreprice g WHERE Year_Release>=? AND d.Genre=g.Genre GROUP BY d.Genre";
+		if (zone.compareTo( "Europe" )==0 ) string="SELECT DISTINCT d.Genre AS genere, AVG(EU_Sales) AS sales, g.PriceForUnit AS price FROM DATA d, genreprice g WHERE Year_Release>=? AND d.Genre=g.Genre GROUP BY d.Genre";
+		if (zone.compareTo( "Japan" )==0 ) string="SELECT DISTINCT d.Genre AS genere, AVG(JP_Sales) AS sales, g.PriceForUnit AS price FROM DATA d, genreprice g WHERE Year_Release>=? AND d.Genre=g.Genre GROUP BY d.Genre";
+		if (zone.compareTo( "Rest of World" )==0) string="SELECT DISTINCT d.Genre AS genere, AVG(OTHER_Sales) AS sales, g.PriceForUnit AS price FROM DATA d, genreprice g WHERE Year_Release>=? AND d.Genre=g.Genre GROUP BY d.Genre";
+		if (zone.compareTo( "All" )==0) string="SELECT DISTINCT d.Genre AS genere, AVG(GLOBAL_Sales) AS sales, g.PriceForUnit AS price FROM DATA d, genreprice g WHERE Year_Release>=? AND d.Genre=g.Genre GROUP BY d.Genre";
+		
+		//Final String for query
+		final String sql = string;
+		
         List<Genre> result = new ArrayList<>();
 		
 		try {
@@ -87,18 +98,13 @@ public class VideogameDAO {
 			PreparedStatement st = conn.prepareStatement(sql);
 			
 			//Set parameter
-			if (zone.compareTo("North America")==0) st.setString(1, "NA_Sales");
-			if (zone.compareTo("Europe")==0) st.setString(1, "EU_Sales");
-			if (zone.compareTo("Japan")==0) st.setString(1, "JP_Sales");
-			if (zone.compareTo("Rest of World")==0) st.setString(1, "OTHER_Sales");
-			if (zone.compareTo("All")==0) st.setString(1, "GLOBAL_Sales");
-			st.setInt(2, year);
+			st.setInt(1, year);
 			
 			
 			ResultSet rs = st.executeQuery();
 
 			while (rs.next()) {
-				Genre g = new Genre(rs.getString("genere"), rs.getDouble("price"),rs.getDouble("sales"));
+				Genre g = new Genre(rs.getString("genere"), rs.getDouble("price"), rs.getDouble("sales"));
 				result.add(g);
 			}
 

@@ -7982,22 +7982,22 @@ CREATE TABLE IF NOT EXISTS `genreprice` (
 -- Dump dei dati della tabella datavg.genreprice: ~16 rows (circa)
 /*!40000 ALTER TABLE `genreprice` DISABLE KEYS */;
 INSERT INTO `genreprice` (`Genre`, `PriceForUnit`) VALUES
-	('Sports', 0),
-	('Platform', 0),
-	('Racing', 0),
-	('Role-Playing', 0),
-	('Puzzle', 0),
-	('Misc', 0),
-	('Shooter', 0),
-	('Simulation', 0),
-	('Action', 0),
-	('Fighting', 0),
-	('Adventure', 0),
-	('Strategy', 0),
-	('Action-Adventure', 0),
-	('MMO', 0),
-	('Music', 0),
-	('Party', 0);
+	('Sports', 70),
+	('Platform', 75),
+	('Racing', 60),
+	('Role-Playing', 50),
+	('Puzzle', 65),
+	('Misc', 50),
+	('Shooter', 70),
+	('Simulation', 30),
+	('Action', 60),
+	('Fighting', 55),
+	('Adventure', 50),
+	('Strategy', 35),
+	('Action-Adventure', 80),
+	('MMO', 40),
+	('Music', 40),
+	('Party', 20);
 /*!40000 ALTER TABLE `genreprice` ENABLE KEYS */;
 
 /*!40101 SET SQL_MODE=IFNULL(@OLD_SQL_MODE, '') */;

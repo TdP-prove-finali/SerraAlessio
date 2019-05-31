@@ -1,8 +1,6 @@
 package it.polito.tdp.vgdatatool.model;
 
-import java.security.cert.CollectionCertStoreParameters;
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
 import it.polito.tdp.vgdatatool.db.VideogameDAO;
 
@@ -12,7 +10,9 @@ public class Model {
 	List<Genre> allGenres = new ArrayList<>();
 	
 	public List<Genre> getAllGenres(){
+		
 		VideogameDAO dao = new VideogameDAO();
+		
 		return dao.getAllGenres();
 	}
 	
@@ -93,17 +93,22 @@ public class Model {
 		
 		//Collego Model e Dao
 		VideogameDAO dao = new VideogameDAO();
+		this.best = new ArrayList<>();
+		
 		//Clear by old recursion
 		if (!allGenres.isEmpty()) allGenres.clear();
 		
 		//Add all genres need for combination
-		allGenres= dao.getGenresRecursion(year, zone);;
+		for (int i=0;i<lenght;i++)
+		allGenres.addAll(dao.getGenresRecursion(year, zone));
+		
+		System.out.println(allGenres);
 		
 		//Creo soluzione parziale vuota
 		List<Genre> partial = new ArrayList<Genre>();
 		
 		//Azzero best
-		this.best=null;
+		this.best.add(new Genre("Default", 0.0, 0.0));
 		
 		//Start recursion (level 0)
 		sub_recursion(partial, 0, lenght, budget);
@@ -115,25 +120,26 @@ public class Model {
 	public void sub_recursion(List<Genre> partial,int level,int lenght,int budget){
 		
 		//FINAL CASE
-		if (partial.size() == lenght) {	
+		
+		if (level == lenght) {	
 			 //Choose the best that maximize the budget
-	         if ( getListPrice(partial)<=budget && ( budget-getListPrice(partial) < budget-getListPrice(best))) {		
-	        	 
-	         this.best = new ArrayList<>(partial);
-		     
+			if (getListPrice(partial) > getListPrice(this.best)) {
+				
+	         this.best = new ArrayList<>(partial);	     
 		     return;
-	         }
+		     
+			}
+	         
 		}
 				
 		//INTERMEDIATE CASE
 		for (Genre gen : allGenres ) {
 					                              
-			if ( tryBudget(partial, budget, gen)) {	
+			if ( tryBudget(partial, budget, gen)==true ) {	
 				
 				partial.add(gen);		
 				
 				sub_recursion(partial, level+1, lenght, budget);
-				
 				
 				//backtracking		
 				partial.remove(partial.size()-1);
@@ -153,19 +159,23 @@ public class Model {
 		//Get price of the partial
 		double pricePartial = getListPrice(partial);
 		
-		if (pricePartial+priceTest<=budget) return true;
-		else return true;
+		if ( pricePartial+priceTest <= budget ) return true;
+		
+	    //Else 
+		return false;
 		
 	}
 	
-	public double getListPrice(List<Genre> list) {
+	public double getListPrice(List<Genre> listPrice) {
 		
 		double priceList = 0.0;	
 		
-		for (Genre gen : list) {
-			priceList = priceList + gen.getAvgSales()*1000*gen.getPrice();
-		}
+		//First case for best
+		if (listPrice.isEmpty()) return 0.0;
 		
+		for (Genre g : listPrice) {
+			priceList = priceList + (g.getAvgSales()*1000*g.getPrice());
+		}
 		return priceList;
 
 	}
