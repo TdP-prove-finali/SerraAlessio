@@ -113,6 +113,7 @@ public class BestMixController{
     	    dataPieChart.add(new PieChart.Data("Budget left",budgetLeft));
     		ObservableList<PieChart.Data> pieChartData = FXCollections.observableArrayList(dataPieChart);
     		pieChart.setData(pieChartData);
+    		         
     	}
     	else txtResult.appendText("NO combination for this lenght and \nthis budget found!");
 
