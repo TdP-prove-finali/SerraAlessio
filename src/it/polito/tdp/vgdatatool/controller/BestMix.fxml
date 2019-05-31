@@ -95,7 +95,7 @@
                   </PieChart>
                </children>
             </HBox>
-            <HBox prefHeight="100.0" prefWidth="200.0">
+            <HBox prefHeight="57.0" prefWidth="560.0">
                <children>
                   <Button fx:id="handleBack" mnemonicParsing="false" onAction="#doBack" text="Back">
                      <HBox.margin>
@@ -136,7 +136,7 @@
                   <Image url="@../../../../../../img/logo.png" />
                </image>
                <HBox.margin>
-                  <Insets left="140.0" right="20.0" />
+                  <Insets left="140.0" right="20.0" top="5.0" />
                </HBox.margin>
             </ImageView>
          </children>
