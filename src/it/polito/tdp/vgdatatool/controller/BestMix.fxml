@@ -89,6 +89,9 @@
                      <HBox.margin>
                         <Insets right="10.0" />
                      </HBox.margin>
+                     <padding>
+                        <Insets top="25.0" />
+                     </padding>
                   </PieChart>
                </children>
             </HBox>
