@@ -107,12 +107,12 @@
                         <Insets left="177.0" top="10.0" />
                      </HBox.margin>
                   </Button>
-                  <Label fx:id="processTime" text="process time..." textFill="#1e0272">
+                  <Label fx:id="processTime" prefHeight="15.0" prefWidth="137.0" text="process time..." textFill="#1e0272">
                      <font>
                         <Font size="10.0" />
                      </font>
                      <HBox.margin>
-                        <Insets left="160.0" top="20.0" />
+                        <Insets left="120.0" top="20.0" />
                      </HBox.margin>
                   </Label>
                </children>

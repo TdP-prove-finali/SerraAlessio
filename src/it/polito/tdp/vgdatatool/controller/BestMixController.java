@@ -2,9 +2,14 @@ package it.polito.tdp.vgdatatool.controller;
 
 import java.io.IOException;
 import java.net.URL;
+import java.sql.Date;
+import java.time.Duration;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.ResourceBundle;
+import java.util.concurrent.TimeUnit;
+
+import com.mysql.cj.util.TimeUtil;
 
 import it.polito.tdp.vgdatatool.model.Genre;
 import it.polito.tdp.vgdatatool.model.Model;
@@ -91,6 +96,8 @@ public class BestMixController{
     	String zone = comboBox.getValue();
     	
     	if (zone!=null) {
+    	long beginT = System.nanoTime();
+    		
     	List<Genre> result = model.recursion(lenght, budget, year, zone);
     	
     	System.out.println(result);
@@ -113,6 +120,14 @@ public class BestMixController{
     	    dataPieChart.add(new PieChart.Data("Budget left",budgetLeft));
     		ObservableList<PieChart.Data> pieChartData = FXCollections.observableArrayList(dataPieChart);
     		pieChart.setData(pieChartData);
+    		
+    		long endTime = System.nanoTime();
+    		
+    		//Set visible process time
+    		long time = endTime - beginT ;
+    		time = TimeUnit.MILLISECONDS.convert(time, TimeUnit.NANOSECONDS);
+    		processTime.setText("Process time : "+time+" milliseconds");
+    		processTime.setOpacity(1);
     		         
     	}
     	else txtResult.appendText("NO combination for this lenght and \nthis budget found!");

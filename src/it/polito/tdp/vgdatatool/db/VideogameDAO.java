@@ -105,7 +105,8 @@ public class VideogameDAO {
 
 			while (rs.next()) {
 				Genre g = new Genre(rs.getString("genere"), rs.getDouble("price"), rs.getDouble("sales"));
-				result.add(g);
+				
+				if (g.getAvgSales()>0) result.add(g);
 			}
 
 			conn.close();

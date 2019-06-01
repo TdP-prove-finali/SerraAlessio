@@ -81,7 +81,7 @@ public class VGDataToolController {
 		Model model = new Model();
 		controller.setModel(model,this.stage);
 		
-		Scene scene = new Scene(root,562,347);
+		Scene scene = new Scene(root,559,347);
 		
 		scene.getStylesheets().add(getClass().getResource("application.css").toExternalForm());
 		stage.setScene(scene);
