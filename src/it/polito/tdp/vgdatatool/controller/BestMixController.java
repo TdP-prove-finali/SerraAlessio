@@ -40,6 +40,7 @@ public class BestMixController{
 		//Set combo box
 		comboBox.getItems().addAll("North America","Europe","Japan","Rest of World","All");
 
+		
 		//Set process time invisible before the start of the algorithm
 		processTime.setOpacity(0.0);
 		
