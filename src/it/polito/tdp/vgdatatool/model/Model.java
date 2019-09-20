@@ -142,7 +142,8 @@ public class Model {
 				//backtracking		
 				partial.remove(partial.size()-1);
 			}
-				
+			
+			else return;				
 		}
 	}
 	

@@ -89,7 +89,7 @@ public class VideogameDAO {
 		if (zone.compareTo( "All" )==0) string="SELECT DISTINCT d.Genre AS genere, AVG(GLOBAL_Sales) AS sales, g.PriceForUnit AS price FROM DATA d, genreprice g WHERE Year_Release>=? AND d.Genre=g.Genre GROUP BY d.Genre";
 		
 		//Final String for query
-		final String sql = string;
+		String sql = string;
 		
         List<Genre> result = new ArrayList<>();
 		
@@ -104,9 +104,10 @@ public class VideogameDAO {
 			ResultSet rs = st.executeQuery();
 
 			while (rs.next()) {
+				
 				Genre g = new Genre(rs.getString("genere"), rs.getDouble("price"), rs.getDouble("sales"));
 				
-				if (g.getAvgSales()>0) result.add(g);
+				if (g.getAvgSales()>(0.1)) result.add(g);
 			}
 
 			conn.close();

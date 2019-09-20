@@ -21,7 +21,7 @@ public class VGDataToolController {
 	
 	public void setModel(Model model,Stage stage) {
 		this.model=model;
-		this.stage=stage; //in modo da rimanere sempre sullo stage iniziale
+		this.stage=stage;
 	}
 
     @FXML
@@ -78,7 +78,7 @@ public class VGDataToolController {
 		BestMixController controller = loader.getController();
 		
 		//Set the model
-		Model model = new Model();
+		model = new Model();
 		controller.setModel(model,this.stage);
 		
 		Scene scene = new Scene(root,559,347);

@@ -2,14 +2,10 @@ package it.polito.tdp.vgdatatool.controller;
 
 import java.io.IOException;
 import java.net.URL;
-import java.sql.Date;
-import java.time.Duration;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.ResourceBundle;
 import java.util.concurrent.TimeUnit;
-
-import com.mysql.cj.util.TimeUtil;
 
 import it.polito.tdp.vgdatatool.model.Genre;
 import it.polito.tdp.vgdatatool.model.Model;
@@ -40,7 +36,6 @@ public class BestMixController{
 		//Set combo box
 		comboBox.getItems().addAll("North America","Europe","Japan","Rest of World","All");
 
-		
 		//Set process time invisible before the start of the algorithm
 		processTime.setOpacity(0.0);
 		
