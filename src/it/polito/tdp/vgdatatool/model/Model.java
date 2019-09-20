@@ -91,7 +91,7 @@ public class Model {
 	//Start recursion
 	public List<Genre> recursion(int lenght,int budget, int year, String zone){
 		
-		//Collego Model e Dao
+		//Collego Model e DAO
 		VideogameDAO dao = new VideogameDAO();
 		this.best = new ArrayList<>();
 		
@@ -101,8 +101,6 @@ public class Model {
 		//Add all genres need for combination
 		for (int i=0;i<lenght;i++)
 		allGenres.addAll(dao.getGenresRecursion(year, zone));
-		
-		System.out.println(allGenres);
 		
 		//Creo soluzione parziale vuota
 		List<Genre> partial = new ArrayList<Genre>();
@@ -122,12 +120,12 @@ public class Model {
 		//FINAL CASE
 		
 		if (level == lenght) {	
+			
 			 //Choose the best that maximize the budget
 			if (getListPrice(partial) > getListPrice(this.best)) {
 				
 	         this.best = new ArrayList<>(partial);	     
-		     return;
-		     
+		     return;	     
 			}
 	         
 		}

@@ -100,8 +100,6 @@ public class BestMixController{
     		
     	List<Genre> result = model.recursion(lenght, budget, year, zone);
     	
-    	System.out.println(result);
-    	
     	if (result.size()==lenght) {
     		txtResult.appendText("The best combination for "+budget+"$ is:\n");
     		
