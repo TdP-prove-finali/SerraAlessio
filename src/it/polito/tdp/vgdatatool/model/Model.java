@@ -160,9 +160,8 @@ public class Model {
 		
 		if ( pricePartial+priceTest <= budget ) return true;
 		
-	    //Else 
-		return false;
-		
+	    //else 
+		return false;	
 	}
 	
 	public double getListPrice(List<Genre> listPrice) {
