@@ -180,5 +180,6 @@ public class BestMixController{
         assert handleAnalize != null : "fx:id=\"handleAnalize\" was not injected: check your FXML file 'BestMix.fxml'.";
         assert processTime != null : "fx:id=\"processTime\" was not injected: check your FXML file 'BestMix.fxml'.";
 
+        
     }
 }
